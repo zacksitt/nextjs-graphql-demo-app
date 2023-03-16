@@ -40,18 +40,18 @@ const query = gql
 
 export default function GraphQLRequest() {
   const [name, setName] = useState('');
+  const [searched, setSearched] = useState(false);
   const [pokemon, setPokemon] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const getUserDetailByGraphQLRequestAPICall = async (name) => {
     
-    console.log("user detail by api call",name);
     try {
       setIsLoading(true);
       const variables = { name };
-      console.log("varaibles",variables);
       const response = await client.request(query, variables);
-      console.log('RESPONSE FROM GRAPHQL-REQUEST API CALL', response);
+      setSearched(true);
+
       if (response.pokemon) {
         setPokemon(response.pokemon);
       }else{
@@ -69,7 +69,10 @@ export default function GraphQLRequest() {
   const clickOnSearch = async() => {
     getUserDetailByGraphQLRequestAPICall(name); 
   }
-  
+  const onChangedText = async(value) => {
+    setName(value);
+    setSearched(false)
+  }
   const clickOnName = async(pokemonName) => {
 
     setName(pokemonName);
@@ -88,7 +91,7 @@ export default function GraphQLRequest() {
           type="text"
           placeholder="Type name"
           value={name}
-          onChange={(e) => { setName(e.target.value); }}
+          onChange={(e) => onChangedText(e.target.value)}
         />
         
         <button
@@ -135,10 +138,10 @@ export default function GraphQLRequest() {
               <img src={e.image} alt="" className='object-cover h-10 w-10 rounded-full'/>
               <a href="#" className="text-gray-500 text-sm text-center" onClick={() => clickOnName(e.name)}>{e.name}</a>
           </div>)}
-        </div>:
+        </div> : name != "" && searched ?
         <div className='flex flex-col justify-evenly items-center rounded-lg shadow-xl w-1/2 p-4 m-4 bg-gray-100 text-white'> 
           <span className='text-gray-500'>No result found!</span>
-        </div>
+        </div>: null
       }
       
     </div>
