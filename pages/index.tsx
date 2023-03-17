@@ -8,32 +8,33 @@ import Link from 'next/link';
 type  Pokemon = {
     id: number;
     name:string;
-    number: string;
-    weight:{
+    number?: string;
+    weight?:{
       minimum:string,
       maximum:string
     },
-    height:{
+    height?:{
       minimum:string,
       maximum:string
     },
-    classification:string,
-    types:string[],
-    fleeRate:number,
-    maxCP:string,
-    maxHP:string,
-    image: string;
-    resistant: string[];
-    weaknesses: string[];
-    evolutions: string[]
+    classification?:string,
+    types?:string[],
+    fleeRate?:number,
+    maxCP?:string,
+    maxHP?:string,
+    image?: string;
+    resistant?: string[];
+    weaknesses?: string[];
+    evolutions?: string[]
 }
 
 type Response = {
   pokemon: Pokemon
 }
 
-export default function GraphQLRequest({p}:{p:Pokemon}) {
+export default function PokemonSearch() {
   
+  let p:Pokemon = {id:0,"name":""}
   const [name, setName] = useState('');
   const [searched, setSearched] = useState(false);
   const [pokemon, setPokemon] = useState(p);
@@ -81,6 +82,12 @@ export default function GraphQLRequest({p}:{p:Pokemon}) {
         <h2 className="text-center text-black font-medium text-2xl mb-4 self-start ">
           Find pokemon information by name.
         </h2>
+        {
+          pokemon.name != "" ? 
+          <small><span data-testid="name-text">found: </span>{pokemon.name}</small>
+          : <small></small>
+        }
+        
         <input
           data-testid="search-input"
           className="border-2 outline-none p-2 rounded-md"
@@ -110,7 +117,7 @@ export default function GraphQLRequest({p}:{p:Pokemon}) {
        
       </div>
       {
-       pokemon ?
+       pokemon.id != 0 ?
        <div className='rounded-lg shadow-xl w-1/2 p-4 m-4 bg-gray-100 text-white'>
           <img src={pokemon.image} alt="" className='m-auto object-cover h-20 w-20 rounded-full'/>
           <h2 className="font-medium text-2xl mb-4 text-gray-500 text-center">
