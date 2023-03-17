@@ -82,12 +82,8 @@ export default function PokemonSearch() {
         <h2 className="text-center text-black font-medium text-2xl mb-4 self-start ">
           Find pokemon information by name.
         </h2>
-        {
-          pokemon.name != "" ? 
-          <small><span data-testid="name-text">found: </span>{pokemon.name}</small>
-          : <small></small>
-        }
-        
+ 
+        <span data-testid="name-text">{pokemon.name != "" ? <small >found: </small>:null} <small>{pokemon.name}</small></span>
         <input
           data-testid="search-input"
           className="border-2 outline-none p-2 rounded-md"
