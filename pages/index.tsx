@@ -82,6 +82,7 @@ export default function GraphQLRequest({p}:{p:Pokemon}) {
           Find pokemon information by name.
         </h2>
         <input
+          data-testid="search-input"
           className="border-2 outline-none p-2 rounded-md"
           type="text"
           placeholder="Type name"
@@ -90,6 +91,7 @@ export default function GraphQLRequest({p}:{p:Pokemon}) {
         />
         
         <button
+          data-testid="search-button"
           type="submit"
           className="
             flex justify-center
