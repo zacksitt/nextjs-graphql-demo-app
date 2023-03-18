@@ -34,7 +34,7 @@ type Response = {
 
 export default function PokemonSearch() {
   
-  let p:Pokemon = {id:0,"name":""}
+  let p:Pokemon = {id:0,"name":"",types:[]}
   const [name, setName] = useState('');
   const [searched, setSearched] = useState(false);
   const [pokemon, setPokemon] = useState(p);
@@ -83,7 +83,7 @@ export default function PokemonSearch() {
           Find pokemon information by name.
         </h2>
  
-        <span data-testid="name-text">{pokemon.name != "" ? <small >found: </small>:null} <small>{pokemon.name}</small></span>
+        <span data-testid="name-text">{pokemon.name != "" ? <small >found: </small>:null} <small>{pokemon.name}({pokemon.types.map((w:any) => <span key={w} className=""> {w}</span>)})</small></span>
         <input
           data-testid="search-input"
           className="border-2 outline-none p-2 rounded-md"

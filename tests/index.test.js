@@ -16,10 +16,39 @@ describe("Find pokemon", () => {
         await waitFor(async () => {
           const searchInput = await screen.getByTestId("search-input");
           const searchButton = await screen.getByTestId("search-button");
-          await fireEvent.change(searchInput, { target: { value: "Venusaur"}});
+          await fireEvent.change(searchInput, { target: { value: "Bulbasaur"}});
           await searchButton.click();
           const nameText = await screen.getByTestId("name-text");
-          await expect(nameText).toHaveTextContent("Venusaur");
+          await expect(nameText).toHaveTextContent("Bulbasaur");
+          await expect(nameText).toHaveTextContent("Grass");
+        });
+        
+      });
+      it("search pokemon", async () => {
+        render(<PokemonSearch />);
+        // check search funtionality
+        await waitFor(async () => {
+          const searchInput = await screen.getByTestId("search-input");
+          const searchButton = await screen.getByTestId("search-button");
+          await fireEvent.change(searchInput, { target: { value: "Charmander"}});
+          await searchButton.click();
+          const nameText = await screen.getByTestId("name-text");
+          await expect(nameText).toHaveTextContent("Charmander");
+          await expect(nameText).toHaveTextContent("Fire");
+        });
+        
+      });
+      it("search pokemon", async () => {
+        render(<PokemonSearch />);
+        // check search funtionality
+        await waitFor(async () => {
+          const searchInput = await screen.getByTestId("search-input");
+          const searchButton = await screen.getByTestId("search-button");
+          await fireEvent.change(searchInput, { target: { value: "Squirtle"}});
+          await searchButton.click();
+          const nameText = await screen.getByTestId("name-text");
+          await expect(nameText).toHaveTextContent("Squirtle");
+          await expect(nameText).toHaveTextContent("Water");
         });
         
       });
