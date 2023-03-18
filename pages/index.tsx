@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import React,{ useState } from 'react';
 import { GraphQLClient, gql } from 'graphql-request';
 const client = new GraphQLClient("https://graphql-pokemon2.vercel.app");
 import query from '../db/queryPokemon';
@@ -9,23 +9,23 @@ type  Pokemon = {
     id: number;
     name:string;
     number?: string;
-    weight?:{
+    weight:{
       minimum:string,
       maximum:string
     },
-    height?:{
+    height:{
       minimum:string,
       maximum:string
     },
     classification?:string,
-    types?:string[],
+    types:string[],
     fleeRate?:number,
     maxCP?:string,
     maxHP?:string,
     image?: string;
-    resistant?: string[];
-    weaknesses?: string[];
-    evolutions?: string[]
+    resistant: string[];
+    weaknesses: string[];
+    evolutions: string[]
 }
 
 type Response = {
@@ -34,7 +34,7 @@ type Response = {
 
 export default function PokemonSearch() {
   
-  let p:Pokemon = {id:0,"name":"",types:[]}
+  let p:Pokemon = {id:0,name:"",number:"",weight:{maximum:"",minimum:""},height:{maximum:"",minimum:""},types:[],fleeRate:0,"maxCP":"",maxHP:"",resistant:[],weaknesses:[],evolutions:[]}
   const [name, setName] = useState('');
   const [searched, setSearched] = useState(false);
   const [pokemon, setPokemon] = useState(p);
@@ -83,7 +83,12 @@ export default function PokemonSearch() {
           Find pokemon information by name.
         </h2>
  
-        <span data-testid="name-text">{pokemon.name != "" ? <small >found: </small>:null} <small>{pokemon.name}({pokemon.types.map((w:any) => <span key={w} className=""> {w}</span>)})</small></span>
+        <span data-testid="name-text">{pokemon.name != "" ? 
+          <small >found: </small>:null} 
+          <small>
+            {pokemon.name} <span className='text-transparent'>{pokemon.types.map((w:any) => <span key={w} className=""> {w}</span>)}</span>
+          </small>
+        </span>
         <input
           data-testid="search-input"
           className="border-2 outline-none p-2 rounded-md"

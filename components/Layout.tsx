@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-export default function Layout({ children }) {
+export default function Layout({ children }:{children:any}) {
   return (
     <div className='flex flex-col h-screen'>
       <header className="flex shadow-lg p-4 bg-yellow-500 text-white">

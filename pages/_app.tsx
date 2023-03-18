@@ -4,7 +4,7 @@ import '../styles/globals.css';
 import client from '../lib/apolloClient';
 import { ApolloProvider } from '@apollo/client';
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }:any) {
   return (
     <Layout>
       <ApolloProvider client={client}>
