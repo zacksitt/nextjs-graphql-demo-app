@@ -2,7 +2,6 @@ import React,{ useState } from 'react';
 import { GraphQLClient, gql } from 'graphql-request';
 const client = new GraphQLClient("https://graphql-pokemon2.vercel.app");
 import query from '../db/queryPokemon';
-import Image from 'next/image'
 import Link from 'next/link';
 
 type  Pokemon = {
@@ -69,6 +68,7 @@ export default function PokemonSearch() {
     setName(value);
     setSearched(false)
   }
+  
   const clickOnName = async(pokemonName:any) => {
 
     setName(pokemonName);
