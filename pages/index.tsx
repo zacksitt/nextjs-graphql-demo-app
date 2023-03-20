@@ -3,30 +3,7 @@ import { GraphQLClient, gql } from 'graphql-request';
 const client = new GraphQLClient("https://graphql-pokemon2.vercel.app");
 import query from '../db/queryPokemon';
 import Link from 'next/link';
-
-type  Pokemon = {
-    id: number;
-    name:string;
-    number?: string;
-    weight:{
-      minimum:string,
-      maximum:string
-    },
-    height:{
-      minimum:string,
-      maximum:string
-    },
-    classification?:string,
-    types:string[],
-    fleeRate?:number,
-    maxCP?:string,
-    maxHP?:string,
-    image?: string;
-    resistant: string[];
-    weaknesses: string[];
-    evolutions: string[]
-}
-
+import {Pokemon} from '../lib/pokemon';
 type Response = {
   pokemon: Pokemon
 }
